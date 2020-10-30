@@ -14,33 +14,60 @@
  */
 
 import java.util.Scanner;
+import java.lang.Math;
 
-public class IF110119036Latihan22 {
-
+public class IF110119036Latihan22 {    
+    static Scanner scan = new Scanner(System.in);
+    static final double pi = Math.PI;    
+    double diameter;    
     /**
      * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+     */    
+    private void validasi(String diameter){
+       if(!diameter.matches("^[0-9]*$")){
+            System.out.println("Nilai Diameter Tidak Sesuai");
+            masukkanDiameterLingkaran();       
+       }else{
+           this.diameter = Double.parseDouble(diameter);
+       }                 
+    }   
+    
+    private void masukkanDiameterLingkaran(){
+        System.out.println("=====Perhitungan Lingkaran=====");
+        System.out.print("Masukkan nilai diameter lingkaran : ");
+        validasi(scan.next());                          
+    }
         
-        Scanner input = new Scanner(System.in);
-        
-        int Diameter;
-        double Jari,Luas,Keliling;
-        
-        System.out.println("======== Perhitungan Lingkara n========");
-        System.out.println("Masukkan Nilai Diameter Lingkaran :  ");
-        Diameter = input.nextInt();
-        input.nextLine();
-        
-        Jari = Diameter * 1/2;
-        Luas = Diameter * Diameter * 1/4 * 3.14;
-        Keliling = Diameter * 3.14;
-        
-        System.out.println("=====Hasil Perhitungan Lingkaran=====");
-        System.out.println("Jari-Jari Lingkaran = " + Jari + " cm");
-        System.out.println("Luas Lingkaran = " + Luas + " cm");
-        System.out.println("Keliling Lingkaran = " + Keliling + " cm");
+    private double hitungLuasLingkaran(){                
+        return pi * Math.pow(diameter, 2);
     }
     
-}
+    private double hitungJariJariLingkaran(double luas){        
+        return Math.sqrt(luas / pi);
+    }
+    
+    private double kelilingLingkaran(double jariJari){
+        return 2 * pi * jariJari;
+    }
+    
+    private static void tampilHasil(double luas, double jariJari, double keliling){   
+        System.out.println("\n====Perhitungan Lingkaran====");
+        System.out.println("Jari-jari Lingkaran = "+jariJari+" cm");
+        System.out.println("Luas Lingkaran = "+luas+" cm");
+        System.out.println("Keliling Lingkaran = "+keliling+" cm");
+    }
+    
+    
+    public static void main(String[] args) {
+        IF110119036Latihan22 data = new IF110119036Latihan22();
+        data.masukkanDiameterLingkaran();            
+        double luas = data.hitungLuasLingkaran();
+        double jariJari = data.hitungJariJariLingkaran(luas);
+        double keliling = data.kelilingLingkaran(jariJari);
+        tampilHasil(luas,jariJari,keliling);
+        System.out.println("Developed by : Alfi Nurizkya");
+        
+    }
+    }
+    
+
